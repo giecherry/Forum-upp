@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/api', (req, res) => {
+router.get('/', (req, res) => {
     res.json({
     name: "Forum API",
     version: "1.0.0",
@@ -22,18 +22,13 @@ router.get('/api', (req, res) => {
         "DELETE /api/comments/:commentId": "Radera en specifik kommentar (autentisering)",
         },
         users: {
+        "GET /api/users/:userId": "Hämta information om en specifik användare (autentisering)",
+        "PUT /api/users/:userId": "Uppdatera information om en specifik användare (autentisering)"
+        },
+        auth: {
         "POST /api/register": "Registrera en ny användare",
         "POST /api/login": "Logga in en befintlig användare (returnerar JWT)",
-        "GET /api/users/:userId": "Hämta information om en specifik användare (autentisering)",
-        "PUT /api/users/:userId": "Uppdatera information om en specifik användare (autentisering)",
-        "POST /api/logout": "Logga ut en användare (invaliderar JWT på klientsidan)",
-        },
-        categories: {
-        "GET /api/categories": "Hämta en lista på alla kategorier",
-        "GET /api/categories/:categoryId/threads": "Hämta alla trådar i en specifik kategori",
-        "POST /api/categories": "Skapa en ny kategori (kräver admin)",
-        "PUT /api/categories/:categoryId": "Uppdatera en kategori (kräver admin)",
-        "DELETE /api/categories/:categoryId": "Radera en kategori (kräver admin)",
+        "POST /api/logout": "Logga ut en användare (invaliderar JWT på klientsidan)"
         }
     },
     authentication: "Använd Bearer token i Authorization header för skyddade routes"
