@@ -11,16 +11,16 @@ function adminMiddleware(req, res, next) {
     if (!token) {
       throw new Error("No token");
     }
-    const decyptedToken = verifyAccessToken(token);
-    if(!decyptedToken.isAdmin) {
+    const decryptedToken = verifyAccessToken(token);
+    if(!decryptedToken.isAdmin) {
       throw new Error("Not an admin")
     }
-    req.userId = decyptedToken.userId
-    req.isAdmin = decyptedToken.isAdmin || false
+    req.userId = decryptedToken.userId
+    req.isAdmin = decryptedToken.isAdmin || false
     next();
     return;
   } catch (error) {
-    console.warn("Error: authroizing endpoint", error)
+    console.warn("Error: Authorizing endpoint", error)
     return res.status(401).json({
       message: "Unauthorized",
     });

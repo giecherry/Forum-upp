@@ -37,10 +37,8 @@ function verifyAccessToken(token) {
     if(!ACCESS_SECRET) {
         throw new Error("NO ACCESS SECRET FOUND IN ENV")
     }
-
-    const decyptedToken = jwt.verify(token, ACCESS_SECRET)
-
-    return decyptedToken
+    const decryptedToken = jwt.verify(token, ACCESS_SECRET)
+    return decryptedToken
 }
 
 function verifyRefreshToken(token) {
@@ -48,9 +46,9 @@ function verifyRefreshToken(token) {
         throw new Error("NO ACCESS SECRET FOUND IN ENV")
     }
 
-    const decyptedToken = jwt.verify(token, REFRESH_SECRET)
+    const decryptedToken = jwt.verify(token, REFRESH_SECRET)
 
-    return decyptedToken
+    return decryptedToken
 }
 
 module.exports = {

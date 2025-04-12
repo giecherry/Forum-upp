@@ -21,7 +21,7 @@ app.use(express.json());
 app.use("/api", apiDocsRoutes);
 
 app.use("/api/auth", authRoutes);
-app.use("/api/threads", authMiddleware, threadsRoutes);
+app.use("/api/threads", threadsRoutes);
 app.use("/api/comments", authMiddleware, commentsRoutes);
 app.use("/api/users", authMiddleware, usersRoutes);
 
@@ -42,4 +42,3 @@ app.listen(port, () => {
     });
 });
 
-app.use("/", apiDocsRoutes);

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user.model'); 
 const authMiddleware = require('../middlewares/authMiddleware'); 
 const router = express.Router();
+const adminMiddleware = require('../middlewares/adminMiddleware');
 
 const validateObjectId = (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.userId)) {
