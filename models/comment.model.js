@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
-  content: String,
-  thread: { type: mongoose.Schema.Types.ObjectId, ref: 'Thread' },
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  content: { type: String, required: true },
+  thread: { type: mongoose.Schema.Types.ObjectId, ref: 'Thread', required: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  maxLength: {
+    type: Number,
+    default: 500,
+  },
+  minLength: {
+    type: Number,
+    default: 1,
+  },
 }
 , {
   timestamps: true,
