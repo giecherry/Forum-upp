@@ -3,36 +3,36 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     res.json({
-    name: "Forum API",
-    version: "1.0.0",
-    description: "API för en enkel forumapplikation",
-    endpoints: {
-        threads: {
-        "GET /api/threads": "Hämta en lista på alla trådar",
-        "POST /api/threads": "Skapa en ny tråd  (autentisering)",
-        "GET /api/threads/:threadId": "Hämta en specifik tråd med alla dess kommentarer",
-        "PUT /api/threads/:threadId": "Uppdatera en specifik tråd (autentisering)",
-        "DELETE /api/threads/:threadId": "Radera en specifik tråd (autentisering)",
-        "POST /api/threads/:threadId/comments": "Skapa en ny kommentar i en specifik tråd (autentisering)",
+        name: "Forum API",
+        version: "1.0.0",
+        description: "API for a simple forum application",
+        endpoints: {
+            threads: {
+                "GET /api/threads": "Fetch a list of all threads",
+                "POST /api/threads": "Create a new thread (authentication required)",
+                "GET /api/threads/:threadId": "Fetch a specific thread with all its comments",
+                "PUT /api/threads/:threadId": "Update a specific thread (authentication required)",
+                "DELETE /api/threads/:threadId": "Delete a specific thread (authentication required)"
+            },
+            comments: {
+                "GET /api/comments/:commentId": "Fetch a specific comment",
+                "POST /api/threads/:threadId": "Add a comment to a specific thread (authentication required)",
+                "PUT /api/comments/:commentId": "Update a specific comment (authentication required)",
+                "DELETE /api/comments/:commentId": "Update a specific comment (authentication required)"
+            },
+            users: {
+                "GET /api/users": "Fetch all users (admin authentication required)",
+                "GET /api/users/:userId": "Fetch information about a specific user (authentication required)",
+                "PUT /api/users/:userId": "Update information about a specific user (authentication required)",
+                "PUT /api/users/:userId/promote": "Promote a user to admin (admin authentication required)"
+            },
+            auth: {
+                "POST /api/register": "Register a new user",
+                "POST /api/login": "Log in an existing user (returns token)",
+            }
         },
-        comments: {
-        "GET /api/threads/:threadId/comments": "Hämta alla kommentarer för en specifik tråd",
-        "GET /api/comments/:commentId": "Hämta en specifik kommentar",
-        "PUT /api/comments/:commentId": "Uppdatera en specifik kommentar (autentisering)",
-        "DELETE /api/comments/:commentId": "Radera en specifik kommentar (autentisering)",
-        },
-        users: {
-        "GET /api/users/:userId": "Hämta information om en specifik användare (autentisering)",
-        "PUT /api/users/:userId": "Uppdatera information om en specifik användare (autentisering)"
-        },
-        auth: {
-        "POST /api/register": "Registrera en ny användare",
-        "POST /api/login": "Logga in en befintlig användare (returnerar JWT)",
-        "POST /api/logout": "Logga ut en användare (invaliderar JWT på klientsidan)"
-        }
-    },
-    authentication: "Använd Bearer token i Authorization header för skyddade routes"
+        authentication: "Use a Bearer token in the Authorization header for protected routes"
     });
 });
 
-module.exports = router; 
+module.exports = router;
