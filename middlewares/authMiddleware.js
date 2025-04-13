@@ -12,7 +12,6 @@ function authMiddleware(req, res, next) {
     
     const decryptedToken = verifyAccessToken(token);
     console.log("Decrypted Token:", decryptedToken); 
-    console.log(decryptedToken);
     req.user = {
       userId: decryptedToken.userId,
       isAdmin: decryptedToken.isAdmin || false,

@@ -11,8 +11,8 @@ const authMiddleware = require("./middlewares/authMiddleware.js");
 
 const app = express();
 const port = 3000;
-const MONGO_URL =
-  process.env.MONGO_URI ||
+const MONGODB_URL =
+  process.env.MONGODB_URI ||
   "mongodb://localhost:27017/";
 
 app.use(cors()); 
@@ -30,7 +30,7 @@ app.listen(port, () => {
     `Server is running on port ${port}`
   );
   mongoose
-    .connect(MONGO_URL)
+    .connect(MONGODB_URL)
     .then(() => {
       console.log("Connected to MongoDB");
     })
