@@ -4,26 +4,26 @@ function authMiddleware(req, res, next) {
   try {
     const authorization = req.headers.authorization;
     if (!authorization) {
-      throw new Error("No authorization");
+      return res.status(401).json({ message: "No authorization" });
     }
 
-    const token = authorization.split(' ')[1];
-    if (!token) throw new Error('No token provided');
-    
+    const token = authorization.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
     const decryptedToken = verifyAccessToken(token);
-    console.log("Decrypted Token:", decryptedToken); 
+    console.log("Decrypted Token:", decryptedToken);
     req.user = {
       userId: decryptedToken.userId,
       isAdmin: decryptedToken.isAdmin || false,
     };
     next();
-    return;
+
   } catch (error) {
-    console.warn("Error: authorizing endpoint", error)
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
+    console.warn("Error: authorizing endpoint", error);
+    return res.status(401).json({ message: "Unauthorized" });
   }
 }
 
-module.exports = authMiddleware
+module.exports = authMiddleware;

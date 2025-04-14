@@ -8,7 +8,7 @@ Du arbetar som backendutvecklare på ett företag som bygger en **forumapplikati
 Du har nu i uppgift att säkerställa att:
 
 - **All inkommande data valideras** strikt innan den sparas eller uppdateras i databasen.
-- **Alla anrop till en specifik `Post` eller kommentar** hanterar fall där resursen inte finns och svarar med ett tydligt `404`meddelande.
+- **Alla anrop till en specifik `Thread` eller kommentar** hanterar fall där resursen inte finns och svarar med ett tydligt `404`meddelande.
 - **Ingen route får krascha** applikationen, och vid fel ska API:t returnera tydliga och användbara felmeddelanden till frontend.
 
 Nedan finns ett kodexempel. Skriv det som **best practice**-kod där en erfaren utvecklare enkelt förstår flödet. Använd gärna kommentarer, men bara om de tillför något. Kodens fokus ska ligga på **stabilitet**, **förutsägbarhet** och **användarvänlig felhantering**.
@@ -17,21 +17,21 @@ Nedan finns ett kodexempel. Skriv det som **best practice**-kod där en erfaren 
 ```
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Post');
+const Thread = require('../models/Thread');
 
-router.post('/posts', async (req, res, next) => {
-  const post = new Post({
+router.thread('/thread', async (req, res, next) => {
+  const thread = new Thread({
     title: req.body.title,
-    body: req.body.body
+    content: req.body.body
   });
-  const savedPost = await post.save();
-  res.status(201).json(savedPost);
+  const savedThread = await thread.save();
+  res.status(201).json(savedThread);
 });
 
-router.delete('/posts/:id', async (req, res, next) => {
-  const post = await Post.findByIdAndDelete(req.params.id);
-  await Comment.deleteMany({ postId: post._id });
-  res.json({ message: 'Inlägg och kommentarer borttagna' });
+router.delete('/threads/:id', async (req, res, next) => {
+  const thread = await Thread.findByIdAndDelete(req.params.id);
+  await Comment.deleteMany({ threadId: thread._id });
+  res.json({ message: 'Thread och kommentarer borttagna' });
 });
 
 module.exports = router;
