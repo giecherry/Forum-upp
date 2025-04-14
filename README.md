@@ -77,7 +77,7 @@ Genom att fokusera på backendutvecklingen har jag kunnat säkerställa att API:
 
 2. **Starta servern**:
    ```
-  npm run dev
+    npm run dev
    ```
 
 3. **API-dokumentation**:
