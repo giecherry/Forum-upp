@@ -7,15 +7,18 @@ const {validateObjectId} = require("./users");
 
 // Get all threads
 router.get("/", async (req, res) => {
-  try {    
+  try { 
+    console.log("Fetching threads...");   
     const threads = await Thread.find();
     if (!threads) {
+      console.log("No threads found");
       return res.status(404).json({ error: "No threads found" });
     }
     res.json(threads);
     console.log("Threads fetched successfully");
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch threads" });
+    console.error("Error fetching threads:", err);
+    res.status(500).json({ message: "Failed to fetch threads" });
   }
 });
 
