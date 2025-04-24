@@ -29,7 +29,11 @@ app.listen(port, () => {
     `Server is running on port ${port}`
   );
   mongoose
-    .connect(MONGODB_URL)
+    .connect(MONGODB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000, 
+    })
     .then(() => {
       console.log("Connected to MongoDB");
     })
