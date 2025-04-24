@@ -33,15 +33,13 @@ app.listen(port, () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 30000, 
+      socketTimeoutMS: 45000,         
     })
     .then(() => {
       console.log("Connected to MongoDB");
     })
     .catch((err) => {
-      console.warn(
-        "Error connecting to MongoDB",
-        err
-      );
+      console.error("Error connecting to MongoDB:", err);
     });
 });
 
