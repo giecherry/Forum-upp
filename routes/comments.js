@@ -1,5 +1,6 @@
 const express = require("express");
 const Comment = require("../models/comment.model"); 
+const Thread = require("../models/thread.model");
 const authMiddleware = require("../middlewares/authMiddleware");
 const router = express.Router();
 const {validateObjectId} = require("./users");
@@ -17,7 +18,7 @@ router.get("/:commentId", validateObjectId('commentId'), async (req, res) => {
 });
 
 //Add a comment to a specific thread (authentication required)
-router.post('/threads/:threadId', authMiddleware, validateObjectId('commentId'), async (req, res) => {
+router.post('/threads/:threadId', authMiddleware, validateObjectId('threadId'), async (req, res) => {
   const { content } = req.body;
   try {
     const thread = await Thread.findById(req.params.threadId);
@@ -26,11 +27,11 @@ router.post('/threads/:threadId', authMiddleware, validateObjectId('commentId'),
     if (content.length < 1 || content.length > 500) {
       return res.status(400).json({ error: 'Content must be between 1 and 500 characters' });
     }
-
+    
     const comment = new Comment({
       content,
       thread: thread._id,
-      author: req.userId, 
+      author: req.user.userId, 
     });
     await comment.save();
 
