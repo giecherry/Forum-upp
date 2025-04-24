@@ -5,10 +5,14 @@ const threadSchema = new mongoose.Schema({
   content: { type: String, required: true },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  maxlength: 1000,
+  maxlength: {
+    type: Number,
+    default: 1000,
+  }
 },
 {
   timestamps: true,
 });
+
 
 module.exports = mongoose.model('Thread', threadSchema);

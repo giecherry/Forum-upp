@@ -6,9 +6,8 @@ const apiDocsRoutes = require("./routes/apiDocs.js");
 const authRoutes = require("./routes/auth.js");
 const threadsRoutes = require("./routes/threads.js");
 const commentsRoutes = require("./routes/comments.js");
-const usersRoutes = require("./routes/users.js");
+const { router: usersRoutes } = require("./routes/users.js");
 const authMiddleware = require("./middlewares/authMiddleware.js");
-
 const app = express();
 const port = 3000;
 const MONGODB_URL =
